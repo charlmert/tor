@@ -8,6 +8,24 @@ https://torguard.net/blog/how-to-setup-the-new-torguard-vpn-app-on-mac-os/
 
 Download and install http://updates.torguard.biz/Software/MacOSX/TorGuard-latest.dmg
 
+## Connect torguard to get the interface name
+
+Connect torguard and check which interface it uses
+
+In mac terminal as root, sudo su
+
+```bash
+#...
+utun0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 2000
+	inet6 fe80::d966:89:2760:1fec%utun0 prefixlen 64 scopeid 0xe 
+	nd6 options=201<PERFORMNUD,DAD>
+pktap0: flags=1<UP> mtu 0
+utun1: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 48000
+	inet 10.135.0.6 --> 10.135.0.5 netmask 0xffffffff 
+```
+
+It's utun1 on my mac so set this in the config for the following step
+
 ## Setup firewall using pfctl
 
 Paste these rules into /etc/pf.conf
@@ -27,7 +45,11 @@ load anchor "com.apple" from "/etc/pf.anchors/com.apple"
 # Allow connection via Torguard only
 #
 wifi=en1 #change this to en0 on MacBook Airs and other Macs without ethernet ports
+
+
+# Set the device HERE, utun1
 vpn=utun1
+
 #vpn2=tap0
 
 block all 
