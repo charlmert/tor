@@ -1,6 +1,73 @@
-## How to secure Apple Mac Mojave (10.14.6) via Torgaurd vpn
-
+# Debian Tor (VPN Protection)
+How to secure debian stretch 9.x via Torgaurd vpn
 Get you a torguard account from R140 p/m @ https://torguard.net/
+
+## Install torguard for debian
+
+```bash
+wget https://torguard.net/downloads/torguard-latest-amd64.deb
+dpkg -i torguard-latest-amd64.deb
+```
+
+Click on "Activities" and type torguard into the search and run it
+You can also type torguard in a console logged in as yourself
+
+## Connect torguard to get the interface name
+
+Connect torguard and check which interface it uses
+
+In debian terminal as root, sudo su
+
+```bash
+ifconfig
+#...
+tun0: flags=4305<UP,POINTOPOINT,RUNNING,NOARP,MULTICAST>  mtu 48000
+        inet xx.xx.x.x  netmask 255.255.255.255  destination 10.37.0.5
+        inet6 xxxx::xxxx:xxxx:xxxx:xxxx  prefixlen 64  scopeid 0x20<link>
+        unspec 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  txqueuelen 100  (UNSPEC)
+        RX packets 188  bytes 55039 (53.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 333  bytes 30855 (30.1 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+
+It's tun0 on my mac so set this in the config for the following step
+
+## Setup firewall using ufw
+
+Install ufw
+
+```bash
+apt-get install ufw
+```
+
+Run these ufw commands in a terminal as root
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+
+sudo ufw allow in on lo from any to any
+sudo ufw allow out on lo from any to any
+
+sudo ufw allow out to any port 443 proto tcp
+sudo ufw allow out to any port 80 proto tcp
+sudo ufw allow out to any port 443 proto udp
+sudo ufw allow out to any port 80 proto udp
+
+sudo ufw allow out to any proto udp
+
+sudo ufw allow out to 1.1.1.1 port 53
+sudo ufw allow out to 8.8.8.8 port 53
+sudo ufw allow out to 9.9.9.9 port 53
+sudo ufw allow out on tun0 from any to any
+sudo ufw enable
+```
+
+# Mac Tor (VPN Protection)
+How to secure Apple Mac Mojave (10.14.6) via Torgaurd vpn
+Get you a torguard account from R140 p/m @ https://torguard.net/
+
 
 ## Install torguard for mac
 
@@ -15,13 +82,14 @@ Connect torguard and check which interface it uses
 In mac terminal as root, sudo su
 
 ```bash
+ifconfig
 #...
 utun0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 2000
 	inet6 fe80::d966:89:2760:1fec%utun0 prefixlen 64 scopeid 0xe 
 	nd6 options=201<PERFORMNUD,DAD>
 pktap0: flags=1<UP> mtu 0
 utun1: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 48000
-	inet 10.135.0.6 --> 10.135.0.5 netmask 0xffffffff 
+	inet xx.xxx.x.x --> xx.xxx.x.x netmask 0xffffffff 
 ```
 
 It's utun1 on my mac so set this in the config for the following step
