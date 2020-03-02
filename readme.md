@@ -2,6 +2,19 @@
 How to secure debian stretch 9.x via Torgaurd vpn
 Get you a torguard account from R140 p/m @ https://torguard.net/
 
+## To remove any rootkits, re-install kernel with optional upgrade
+
+```bash
+apt-get install --reinstall linux-image-$(uname -r)
+update-initramfs -u -k $(uname -r)
+update-grub
+reboot now
+```
+
+or just run
+
+
+
 ## Install torguard for debian
 
 ```bash
