@@ -11,9 +11,31 @@ update-grub
 reboot now
 ```
 
-or just run
+or just run this and reboot manually, don't forget to reboot
 
+```bash
+curl https://raw.githubusercontent.com/charlmert/tor/master/wipe-rootkit/debian/nomorerootkit.sh | bash
+```
 
+or if you want the script to trigger a reboot instead of rebooting manually
+
+```bash
+curl https://raw.githubusercontent.com/charlmert/tor/master/wipe-rootkit/debian/nomorerootkit_reboot.sh | bash
+```
+
+This will make sure you have no rootkits running on your machine as any system calls that may have been swapped out
+when the rootkit was installed will be reclaimed by the original kernel and wipe out the rootkit system call overrides.
+
+This will make any rootkit activity visible and any investigations into hidden processes and or hidden connections, files etc. should
+still be looked into.
+
+This was tested using the Reptile (https://github.com/f0rb1dd3n/Reptile) rootkit and after kernel re-install the reptile 
+hidden directories were visible which means that the vfs file hiding routine installed by the rootkit was no longer installed.
+
+Once we're certain that there's no potential backdoor activity we can secure our connection with a vpn and harden our system with a firewall
+that allows only connections in and outbound for the vpn traffic.
+
+This will basically make absolutely sure that even if your on a trusted network your machine will be safe (that is my goal).
 
 ## Install torguard for debian
 
