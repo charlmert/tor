@@ -208,3 +208,25 @@ pfctl -e
 # disable firewall
 pfctl -d
 ```
+
+
+# Setting up pass
+
+1. Generate gpg key
+2. Initialize password store
+3. Initialize password store git
+4. Generate password
+
+```bash
+gpg --gen-key
+
+gpg --list-keys
+# pub   rsa2048 2020-03-03 [SC] [expires: 2022-03-03]
+#       43A1B6EB152823DEA92740B081222ACFA99262D0
+# uid           [ultimate] Charl <charl@comxnetworks.com>
+# sub   rsa2048 2020-03-03 [E] [expires: 2022-03-03]
+
+pass init 43A1B6EB152823DEA92740B081222ACFA99262D0
+pass git init
+pass generate -c appleid.apple.com/charlmertfb@gmail.com
+```
