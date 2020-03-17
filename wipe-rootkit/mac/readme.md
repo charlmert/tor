@@ -2,6 +2,20 @@
 
 XNU kernel is part of the Darwin operating system for use in macOS and iOS operating systems. XNU is an acronym for X is Not Unix. XNU is a hybrid kernel combining the Mach kernel developed at Carnegie Mellon University with components from FreeBSD and a C++ API for writing drivers called IOKit.
 
+# In Catalina allow access to all files
+
+I downloaded iTerm (https://www.iterm2.com/downloads.html) and gave "Full Disk Access" to it.
+- Open "System Preferences"
+- Click "Security and Privacy"
+- Click the "Privacy Tab"
+- Scroll to "Full Disk Access" in the left scrollable section
+- Unlock the "Click lock to make changes" near the bottom left corner
+- Click "+" and select iTerm application
+
+
+
+Run the following commands from within the iTerm terminal
+
 # Building the latest available kernel
 
 The quick way
