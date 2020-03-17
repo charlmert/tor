@@ -12,8 +12,6 @@ I downloaded iTerm (https://www.iterm2.com/downloads.html) and gave "Full Disk A
 - Unlock the "Click lock to make changes" near the bottom left corner
 - Click "+" and select iTerm application
 
-
-
 Run the following commands from within the iTerm terminal
 
 # Building the latest available kernel
@@ -39,11 +37,17 @@ cp -frv /System /backup
 cp -frv /usr /backup
 ```
 
+At this point it should be noted that you need to prepare for a re-install if the kernel doesn't boot the os and also be able to swap out the backups made via a boot into the system rescue (https://osxdaily.com/2017/05/18/access-terminal-recovery-mode-mac/) to restore the system if you don't want to re-install.
+
 Activate the kernel (look for the xnu build number as seen at the first step when installing e.g. xnu-4903.242.1)
 
 ```bash
 sudo cp -frv build/xnu-4903.242.1.dst/* /
 ```
+
+Now reboot and see if the kernel works.
+I'll test this with the https://github.com/enzolovesbacon/inficere
+And remove with the kernel rebuild.
 
 # Manual install (Not complete, I prefer the xnubuild)
 ## You need xcode command line tools
