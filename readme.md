@@ -35,7 +35,7 @@ hidden directories were visible which means that the vfs file hiding routine ins
 Once we're certain that there's no potential backdoor activity we can secure our connection with a vpn and harden our system with a firewall
 that allows only connections in and outbound for the vpn traffic.
 
-This will basically make absolutely sure that even if your on a trusted network your machine will be safe (that is my goal).
+This will basically make absolutely sure that even if your on an untrusted network your machine will be safe (that is my goal).
 
 ## Install torguard for debian
 
